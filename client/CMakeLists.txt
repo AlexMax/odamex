@@ -81,8 +81,13 @@ if(NOT USE_SDL12)
         "${CMAKE_CURRENT_BINARY_DIR}/SDL2-VC.zip"
         WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}")
       set(SDL2_INCLUDE_DIR "${CMAKE_CURRENT_BINARY_DIR}/SDL2-2.0.12/include")
-      set(SDL2_LIBRARY "${CMAKE_CURRENT_BINARY_DIR}/SDL2-2.0.12/lib/x64/SDL2.lib")
-      set(SDL2MAIN_LIBRARY "${CMAKE_CURRENT_BINARY_DIR}/SDL2-2.0.12/lib/x64/SDL2main.lib")
+      if(CMAKE_SYSTEM_PROCESSOR STREQUAL "x64")
+        set(SDL2_LIBRARY "${CMAKE_CURRENT_BINARY_DIR}/SDL2-2.0.12/lib/x64/SDL2.lib")
+        set(SDL2MAIN_LIBRARY "${CMAKE_CURRENT_BINARY_DIR}/SDL2-2.0.12/lib/x64/SDL2main.lib")
+      else()
+        set(SDL2_LIBRARY "${CMAKE_CURRENT_BINARY_DIR}/SDL2-2.0.12/lib/x86/SDL2.lib")
+        set(SDL2MAIN_LIBRARY "${CMAKE_CURRENT_BINARY_DIR}/SDL2-2.0.12/lib/x86/SDL2main.lib")
+      endif()
     else()
       file(DOWNLOAD
         "https://www.libsdl.org/release/SDL2-devel-2.0.12-mingw.tar.gz"
@@ -107,7 +112,11 @@ if(NOT USE_SDL12)
         "${CMAKE_CURRENT_BINARY_DIR}/SDL2_mixer-VC.zip"
         WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}")
       set(SDL2_MIXER_INCLUDE_DIR "${CMAKE_CURRENT_BINARY_DIR}/SDL2_mixer-2.0.4/include")
-      set(SDL2_MIXER_LIBRARY "${CMAKE_CURRENT_BINARY_DIR}/SDL2_mixer-2.0.4/lib/x64/SDL2_mixer.lib")
+      if(CMAKE_SYSTEM_PROCESSOR STREQUAL "x64")
+        set(SDL2_MIXER_LIBRARY "${CMAKE_CURRENT_BINARY_DIR}/SDL2_mixer-2.0.4/lib/x64/SDL2_mixer.lib")
+      else()
+        set(SDL2_MIXER_LIBRARY "${CMAKE_CURRENT_BINARY_DIR}/SDL2_mixer-2.0.4/lib/x86/SDL2_mixer.lib")
+      endif()
     else()
       file(DOWNLOAD
         "https://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-devel-2.0.4-mingw.tar.gz"

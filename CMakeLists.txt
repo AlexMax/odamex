@@ -27,6 +27,11 @@ cmake_minimum_required(VERSION 2.8)
 set(PROJECT_VERSION 0.8.2)
 set(PROJECT_COPYRIGHT "2006-2020")
 
+# https://gitlab.kitware.com/cmake/cmake/issues/15170
+if(MSVC)
+  set(CMAKE_SYSTEM_PROCESSOR ${MSVC_CXX_ARCHITECTURE_ID})
+endif()
+
 # identify the target CPU
 # adapted from the FindJNI.cmake module included with the CMake distribution
 if(CMAKE_SYSTEM_PROCESSOR STREQUAL "x86_64")
