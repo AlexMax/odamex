@@ -20,6 +20,7 @@ option(BUILD_MASTER "Build master server target" 1)
 option(BUILD_ODALAUNCH "Build odalaunch target" 1)
 cmake_dependent_option( ENABLE_PORTMIDI "Enable portmidi support" 1 BUILD_CLIENT 0 )
 cmake_dependent_option( USE_MINIUPNP "Build with UPnP support" 1 BUILD_SERVER 0 )
+option(ENABLE_TESTS "Enable unit-testing" 0)
 
 project(Odamex)
 cmake_minimum_required(VERSION 3.1)
@@ -188,6 +189,11 @@ endif()
 # This is only really useful when setting up a universal build.
 if(NOT NO_AG-ODALAUNCH_TARGET)
   add_subdirectory(ag-odalaunch)
+endif()
+
+# Enable unit tests if asked for.
+if(ENABLE_TESTS)
+  add_subdirectory(tests)
 endif()
 
 # Packaging options.
