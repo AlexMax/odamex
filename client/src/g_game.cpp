@@ -201,6 +201,7 @@ int				iffdemover;
 byte*			demobuffer;
 byte			*demo_p, *demo_e;
 BOOL 			singledemo; 			// quit after playing a demo from cmdline
+bool			demotest = false;
 int				demostartgametic;
 FILE*			recorddemo_fp;
 
@@ -1923,6 +1924,14 @@ void G_DoPlayDemo(bool justStreamInput)
 		FixPathSeparator(defdemoname);
 		M_AppendExtension(defdemoname, ".lmp");
 		bytelen = M_ReadFile(defdemoname, &demobuffer);
+
+		if (!bytelen && (timingdemo || demotest))
+		{
+			// [AM] Prevents zombie Odamex instances
+			Printf(PRINT_HIGH, "Could not load demo %s, exiting...\n", defdemoname);
+			CL_QuitCommand();
+			return;
+		}
 		demo_p = demobuffer;
 	}
 
@@ -2095,7 +2104,6 @@ void G_TestDemo(const char* name)
 {
 	nodrawers = noblit = true;
 	timingdemo = true;			// don't call I_Sleep in between frames
-	extern bool demotest;
 	demotest = true;
 
 	defdemoname = name;
@@ -2155,7 +2163,6 @@ BOOL G_CheckDemoStatus (void)
 	{
 		G_CleanupDemo();
 
-		extern bool demotest;
 		if (demotest)
 		{
 			AActor *mo = idplayer(1).mo;

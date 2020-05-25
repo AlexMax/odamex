@@ -1107,7 +1107,7 @@ bool I_IsHeadless()
 	static bool initialized = false;
 	if (!initialized)
 	{
-		headless = Args.CheckParm("-novideo") || Args.CheckParm("+demotest");
+		headless = Args.CheckParm("-novideo") || Args.CheckParm("-demotest");
 		initialized = true;
 	}
 

@@ -121,7 +121,6 @@ event_t events[MAXEVENTS];
 int eventhead;
 int eventtail;
 gamestate_t wipegamestate = GS_DEMOSCREEN;	// can be -1 to force a wipe
-bool demotest = false;
 
 IWindowSurface* page_surface;
 
@@ -884,7 +883,7 @@ void D_DoomMain()
 	}
 
 	// denis - this will run a demo and quit
-	p = Args.CheckParm("+demotest");
+	p = Args.CheckParm("-demotest");
 	if (p && p < Args.NumArgs() - 1)
 	{
 		singledemo = true;

@@ -136,6 +136,7 @@ extern	std::string		demorecordfile;
 
 // Quit after playing a demo from cmdline.
 extern	BOOL			singledemo;
+extern	bool			demotest;
 
 
 
@@ -233,6 +234,3 @@ struct DehInfo
 extern struct DehInfo deh;
 
 #endif
-
-
-
