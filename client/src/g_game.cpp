@@ -1928,7 +1928,7 @@ void G_DoPlayDemo(bool justStreamInput)
 		if (!bytelen && (timingdemo || demotest))
 		{
 			// [AM] Prevents zombie Odamex instances
-			Printf(PRINT_HIGH, "Could not load demo %s, exiting...\n", defdemoname);
+			Printf(PRINT_HIGH, "Could not load demo %s, exiting...\n", defdemoname.c_str());
 			CL_QuitCommand();
 			return;
 		}
